@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Организация свадеб - Профессиональный подход</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #f5f5f5;
+            background-color: #1e1e1e;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .header {
+            background: url('https://source.unsplash.com/1600x900/?wedding,bride') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .navbar {
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+        .hero {
+            margin-top: 80px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+        .hero p {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffd700;
+            color: #1e1e1e;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .about, .services, .testimonials, .contact, .clients {
+            padding: 60px 50px;
+            background-color: #1e1e1e;
+        }
+        .about h2, .services h2, .testimonials h2, .contact h2, .clients h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .about-image, .service-item img, .client-item img {
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .service-item, .testimonial-item, .client-item {
+            margin-bottom: 40px;
+        }
+        .client-item {
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+        }
+        .contact form {
+            display: flex;
+            flex-direction: column;
+        }
+        .contact label {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .contact input, .contact textarea {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        .submit-button {
+            padding: 15px;
+            background-color: #ffd700;
+            color: #1e1e1e;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .contact-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .footer {
+            padding: 20px 50px;
+            background-color: #000;
+            text-align: center;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+            .navbar .logo {
+                font-size: 20px;
+            }
+            .nav-links {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+            .nav-links li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            .nav-links a {
+                font-size: 20px;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-toggle {
+                font-size: 24px;
+                color: #fff;
+                cursor: pointer;
+                display: block;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .about, .services, .testimonials, .contact, .clients {
+                padding: 30px 20px;
+            }
+            .about h2, .services h2, .testimonials h2, .contact h2, .clients h2 {
+                font-size: 28px;
+            }
+            .client-item {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="logo">Свадебный Организатор</a>
+            <div class="menu-toggle">&#9776;</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#clients">Наши клиенты</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="hero" id="home">
+            <h1>Ваша Идеальная Свадьба</h1>
+            <p>Профессиональная организация свадебных мероприятий</p>
+            <a href="#contact" class="cta-button">Связаться с нами</a>
+        </div>
+    </header>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <p>Мы - команда профессионалов с многолетним опытом в организации свадеб. Наша миссия - сделать ваш особенный день незабываемым и идеально организованным.</p>
+            <p>Наша история началась с маленькой компании, которая быстро выросла благодаря страсти к своему делу и вниманию к деталям.</p>
+            <img src="https://source.unsplash.com/1600x900/?wedding,planning" alt="О нас" class="about-image">
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Наши Услуги</h2>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,ceremony" alt="Полная организация свадьбы">
+                <h3>Полная организация свадьбы</h3>
+                <p>Мы берем на себя все аспекты планирования и организации вашего мероприятия, от выбора места до координации в день свадьбы.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,decor" alt="Частичная организация">
+                <h3>Частичная организация</h3>
+                <p>Поможем с ключевыми моментами вашего праздника, оставив вам возможность самостоятельно заняться другими вопросами.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,reception" alt="Координация дня свадьбы">
+                <h3>Координация дня свадьбы</h3>
+                <p>Убедимся, что все идет по плану в день свадьбы, чтобы вы могли наслаждаться своим праздником без забот.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients" id="clients">
+        <div class="container">
+            <h2>Наши Клиенты</h2>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,couple" alt="Клиент 1">
+                <p>Анна и Игорь</p>
+            </div>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,bride,groom" alt="Клиент 2">
+                <p>Ольга и Михаил</p>
+            </div>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,happy,couple" alt="Клиент 3">
+                <p>Екатерина и Алексей</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>Отзывы клиентов</h2>
+            <div class="testimonial-item">
+                <p>"Спасибо вам за невероятную организацию нашей свадьбы! Все прошло идеально."</p>
+                <span>- Анна и Игорь</span>
+            </div>
+            <div class="testimonial-item">
+                <p>"Лучший свадебный организатор! Рекомендуем всем."</p>
+                <span>- Ольга и Михаил</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Связаться с нами</h2>
+            <form action="#" method="post">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="submit-button">Отправить</button>
+            </form>
+            <div class="contact-info">
+                <p>Email: info@weddingorganizer.ru</p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+                <p>Адрес: г. Москва, ул. Свадебная, д.1</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Свадебный Организатор. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
