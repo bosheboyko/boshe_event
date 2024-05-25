@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Организатор свадеб</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fdfdfd;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Great Vibes', cursive;
+            color: #ff6f61;
+        }
+
+        .header {
+            background-image: url('https://source.unsplash.com/random/1600x900/?wedding');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .header h1 {
+            font-size: 4em;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-container {
+            position: fixed;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+
+        .nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ff6f61;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: fixed;
+            right: 20px;
+            top: 15px;
+            z-index: 11;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+        }
+
+        .nav.active {
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            left: 0;
+            top: 0;
+            height: 100%;
+            padding-top: 60px;
+            overflow-y: auto; /* Allow scrolling within the menu */
+            touch-action: auto; /* Ensure touch scrolling works */
+        }
+
+        .nav.active a {
+            margin: 10px 0;
+        }
+
+        .section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .section:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        .section h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .services,
+        .testimonials {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service,
+        .testimonial {
+            width: calc(33.333% - 20px);
+            margin: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .service:hover,
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .service h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .service p {
+            font-size: 1em;
+            color: #777;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery a {
+            width: calc(33.333% - 20px);
+            transition: transform 0.3s;
+            box-sizing: border-box;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gallery a:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery img {
+            width: 100%;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            padding: 15px 30px;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #e65c54;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .social-icons a.facebook {
+            color: #3b5998;
+        }
+
+        .social-icons a.instagram {
+            color: #e4405f;
+        }
+
+        .social-icons a.twitter {
+            color: #55acee;
+        }
+
+        .social-icons a:hover {
+            color: #ff6f61;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav.active {
+                display: flex;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .services,
+            .testimonials {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service,
+            .testimonial {
+                width: 80%;
+                margin: 20px 0;
+            }
+
+            .gallery a {
+                width: calc(50% - 10px);
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav.active {
+                position: fixed;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .nav a {
+                font-size: 14px;
+            }
+
+            .section {
+                padding: 40px 10px;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .services,
+            .testimonials {
+                width: 100%;
+            }
+
+            .service,
+            .testimonial {
+                width: calc(100% - 20px);
+                margin: 10px;
+            }
+
+            .gallery a {
+                width: calc(50% - 10px);
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                margin: 5px 0;
+            }
+        }
+
+        .sticky {
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <h1>Организатор свадеб</h1>
+        <div class="nav-container">
+            <nav class="nav">
+                <a href="#about" onclick="closeNav()">О нас</a>
+                <a href="#services" onclick="closeNav()">Услуги</a>
+                <a href="#gallery" onclick="closeNav()">Галерея</a>
+                <a href="#testimonials" onclick="closeNav()">Отзывы</a>
+                <a href="#contact" onclick="closeNav()">Контакты</a>
+            </nav>
+            <div class="burger" onclick="toggleNav()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <h2>Добро пожаловать</h2>
+        <p>Привет! Я [Имя организатора], увлеченный организатор свадеб с многолетним опытом в создании свадеб мечты.</p>
+        <img src="https://source.unsplash.com/random/200x200/?wedding,portrait" alt="Фото организатора" style="width: 200px; border-radius: 50%;">
+    </section>
+
+    <section id="services" class="section">
+        <h2>Наши услуги</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Полное планирование свадьбы</h3>
+                <p>Полное планирование от начала до конца.</p>
+            </div>
+            <div class="service">
+                <h3>Координация в день свадьбы</h3>
+                <p>Обеспечение гладкого хода событий в день свадьбы.</p>
+            </div>
+            <div class="service">
+                <h3>Выбор места проведения</h3>
+                <p>Помощь в выборе идеального места для свадьбы.</p>
+            </div>
+            <div class="service">
+                <h3>Управление поставщиками</h3>
+                <p>Координация работы всех поставщиков.</p>
+            </div>
+            <div class="service">
+                <h3>Индивидуальный дизайн свадьбы</h3>
+                <p>Создание уникального и персонализированного дизайна свадьбы.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <h2>Галерея</h2>
+        <div class="gallery">
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 1">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 1">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 2">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 2">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 3">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 3">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 4">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 4">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 5">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 5">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 6">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 6">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 7" class="hidden">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 7">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 8" class="hidden">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 8">
+            </a>
+            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 9" class="hidden">
+                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 9">
+            </a>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section">
+        <h2>Отзывы</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"Наша свадьба была идеальной благодаря [Имя организатора]." - Счастливая пара</p>
+            </div>
+            <div class="testimonial">
+                <p>"Все было идеально, мы просто наслаждались нашим днем." - Еще одна счастливая пара</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Свяжитесь с нами</h2>
+        <form class="contact-form">
+            <input type="text" placeholder="Ваше имя" required>
+            <input type="email" placeholder="Ваш email" required>
+            <input type="tel" placeholder="Ваш телефон" required>
+            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+            <button type="submit">Отправить сообщение</button>
+        </form>
+        <p>Email: planner@example.com</p>
+        <p>Телефон: (123) 456-7890</p>
+        <div class="social-icons">
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Организатор свадеб. Все права защищены.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav');
+            const navLinks = document.querySelectorAll('.nav a');
+            const header = document.querySelector('.header');
+            const sticky = header.offsetHeight;
+
+            function toggleNav() {
+                nav.classList.toggle('active');
+                burger.classList.toggle('active');
+            }
+
+            function closeNav() {
+                nav.classList.remove('active');
+                burger.classList.remove('active');
+            }
+
+            function stickyNav() {
+                if (window.pageYOffset > sticky) {
+                    nav.classList.add('sticky');
+                } else {
+                    nav.classList.remove('sticky');
+                }
+            }
+
+            burger.addEventListener('click', toggleNav);
+            navLinks.forEach(link => link.addEventListener('click', closeNav));
+            window.addEventListener('scroll', stickyNav);
+
+            // Allow touch scrolling
+            nav.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+            }, { passive: false });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,522 +1,312 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Организатор свадеб</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>Организация свадеб - Профессиональный подход</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        html,
         body {
+            font-family: 'Roboto', sans-serif;
+            color: #f5f5f5;
+            background-color: #1e1e1e;
             margin: 0;
             padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #fdfdfd;
-            color: #333;
-            scroll-behavior: smooth;
         }
-
-        h1,
-        h2,
-        h3 {
-            font-family: 'Great Vibes', cursive;
-            color: #ff6f61;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
         }
-
         .header {
-            background-image: url('https://source.unsplash.com/random/1600x900/?wedding');
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 100px 20px;
-            position: relative;
+            background: url('https://source.unsplash.com/1600x900/?wedding,bride') no-repeat center center/cover;
+            height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .navbar {
             width: 100%;
-            height: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .header h1 {
-            font-size: 4em;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .nav-container {
-            position: fixed;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
             position: fixed;
             top: 0;
-            width: 100%;
-            z-index: 10;
-            transition: background-color 0.3s;
+            z-index: 1000;
         }
-
-        .nav a {
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
             color: #fff;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
             margin: 0 15px;
+        }
+        .nav-links a {
             text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s;
+            color: #fff;
+            font-size: 18px;
         }
-
-        .nav a:hover {
-            color: #ff6f61;
+        .hero {
+            margin-top: 80px;
         }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            position: fixed;
-            right: 20px;
-            top: 15px;
-            z-index: 11;
+        .hero h1 {
+            font-size: 48px;
+            margin: 20px 0;
         }
-
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: #fff;
-            margin: 4px 0;
+        .hero p {
+            font-size: 24px;
+            margin: 20px 0;
         }
-
-        .nav.active {
-            flex-direction: column;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.9);
-            left: 0;
-            top: 0;
-            height: 100%;
-            padding-top: 60px;
-            overflow-y: auto; /* Allow scrolling within the menu */
-            touch-action: auto; /* Ensure touch scrolling works */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffd700;
+            color: #1e1e1e;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
         }
-
-        .nav.active a {
-            margin: 10px 0;
+        .about, .services, .testimonials, .contact, .clients {
+            padding: 60px 50px;
+            background-color: #1e1e1e;
         }
-
-        .section {
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .section:nth-child(even) {
-            background-color: #f8f8f8;
-        }
-
-        .section h2 {
-            font-size: 3em;
+        .about h2, .services h2, .testimonials h2, .contact h2, .clients h2 {
+            font-size: 36px;
             margin-bottom: 20px;
         }
-
-        .services,
-        .testimonials {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .service,
-        .testimonial {
-            width: calc(33.333% - 20px);
-            margin: 10px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        .service:hover,
-        .testimonial:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .service h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8em;
-            color: #333;
-            margin: 10px 0;
-        }
-
-        .service p {
-            font-size: 1em;
-            color: #777;
-        }
-
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .gallery a {
-            width: calc(33.333% - 20px);
-            transition: transform 0.3s;
-            box-sizing: border-box;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .gallery a:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery img {
+        .about-image, .service-item img, .client-item img {
             width: 100%;
-            display: block;
-            transition: transform 0.3s;
+            border-radius: 5px;
+            margin-top: 20px;
         }
-
-        .contact-form {
+        .service-item, .testimonial-item, .client-item {
+            margin-bottom: 40px;
+        }
+        .client-item {
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+        }
+        .contact form {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
         }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
+        .contact label {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .contact input, .contact textarea {
+            margin-bottom: 20px;
             padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-
-        .contact-form button {
-            padding: 15px 30px;
-            background-color: #ff6f61;
-            color: #fff;
             border: none;
-            cursor: pointer;
-            font-size: 1em;
             border-radius: 5px;
-            transition: background-color 0.3s;
         }
-
-        .contact-form button:hover {
-            background-color: #e65c54;
+        .submit-button {
+            padding: 15px;
+            background-color: #ffd700;
+            color: #1e1e1e;
+            border: none;
+            font-size: 18px;
+            border-radius: 5px;
         }
-
+        .contact-info p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
         .footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            padding: 20px 50px;
+            background-color: #000;
             text-align: center;
         }
 
-        .social-icons a {
-            margin: 0 10px;
-            font-size: 1.5em;
-            transition: color 0.3s;
-        }
-
-        .social-icons a.facebook {
-            color: #3b5998;
-        }
-
-        .social-icons a.instagram {
-            color: #e4405f;
-        }
-
-        .social-icons a.twitter {
-            color: #55acee;
-        }
-
-        .social-icons a:hover {
-            color: #ff6f61;
-        }
-
+        /* Media Queries */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5em;
+            .navbar {
+                padding: 10px 20px;
             }
-
-            .burger {
-                display: flex;
+            .navbar .logo {
+                font-size: 20px;
             }
-
-            .nav {
+            .nav-links {
+                flex-direction: column;
                 display: none;
-                flex-direction: column;
-                align-items: center;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 60px;
+                left: 0;
             }
-
-            .nav.active {
+            .nav-links li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            .nav-links a {
+                font-size: 20px;
+            }
+            .nav-links.show {
                 display: flex;
             }
-
-            .section h2 {
-                font-size: 2em;
+            .menu-toggle {
+                font-size: 24px;
+                color: #fff;
+                cursor: pointer;
+                display: block;
             }
-
-            .services,
-            .testimonials {
-                flex-direction: column;
-                align-items: center;
+            .hero h1 {
+                font-size: 36px;
             }
-
-            .service,
-            .testimonial {
-                width: 80%;
-                margin: 20px 0;
+            .hero p {
+                font-size: 18px;
             }
-
-            .gallery a {
-                width: calc(50% - 10px);
+            .about, .services, .testimonials, .contact, .clients {
+                padding: 30px 20px;
             }
-
-            .contact-form {
-                padding: 20px;
+            .about h2, .services h2, .testimonials h2, .contact h2, .clients h2 {
+                font-size: 28px;
             }
-        }
-
-        @media (min-width: 769px) {
-            .nav.active {
-                position: fixed;
+            .client-item {
+                width: 100%;
             }
         }
 
         @media (max-width: 480px) {
-            .header h1 {
-                font-size: 2em;
+            .hero h1 {
+                font-size: 24px;
             }
-
-            .nav a {
-                font-size: 14px;
+            .hero p {
+                font-size: 16px;
             }
-
-            .section {
-                padding: 40px 10px;
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 16px;
             }
-
-            .section h2 {
-                font-size: 1.5em;
-            }
-
-            .services,
-            .testimonials {
-                width: 100%;
-            }
-
-            .service,
-            .testimonial {
-                width: calc(100% - 20px);
-                margin: 10px;
-            }
-
-            .gallery a {
-                width: calc(50% - 10px);
-            }
-
-            .contact-form {
-                padding: 20px;
-            }
-
-            .contact-form input,
-            .contact-form textarea {
-                margin: 5px 0;
-            }
-        }
-
-        .sticky {
-            background-color: rgba(0, 0, 0, 0.85);
         }
     </style>
 </head>
-
 <body>
-
     <header class="header">
-        <h1>Организатор свадеб</h1>
-        <div class="nav-container">
-            <nav class="nav">
-                <a href="#about" onclick="closeNav()">О нас</a>
-                <a href="#services" onclick="closeNav()">Услуги</a>
-                <a href="#gallery" onclick="closeNav()">Галерея</a>
-                <a href="#testimonials" onclick="closeNav()">Отзывы</a>
-                <a href="#contact" onclick="closeNav()">Контакты</a>
-            </nav>
-            <div class="burger" onclick="toggleNav()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <nav class="navbar">
+            <a href="#home" class="logo">Свадебный Организатор</a>
+            <div class="menu-toggle">&#9776;</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#clients">Наши клиенты</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="hero" id="home">
+            <h1>Ваша Идеальная Свадьба</h1>
+            <p>Профессиональная организация свадебных мероприятий</p>
+            <a href="#contact" class="cta-button">Связаться с нами</a>
         </div>
     </header>
 
-    <section id="about" class="section">
-        <h2>Добро пожаловать</h2>
-        <p>Привет! Я [Имя организатора], увлеченный организатор свадеб с многолетним опытом в создании свадеб мечты.</p>
-        <img src="https://source.unsplash.com/random/200x200/?wedding,portrait" alt="Фото организатора" style="width: 200px; border-radius: 50%;">
+    <section class="about" id="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <p>Мы - команда профессионалов с многолетним опытом в организации свадеб. Наша миссия - сделать ваш особенный день незабываемым и идеально организованным.</p>
+            <p>Наша история началась с маленькой компании, которая быстро выросла благодаря страсти к своему делу и вниманию к деталям.</p>
+            <img src="https://source.unsplash.com/1600x900/?wedding,planning" alt="О нас" class="about-image">
+        </div>
     </section>
 
-    <section id="services" class="section">
-        <h2>Наши услуги</h2>
-        <div class="services">
-            <div class="service">
-                <h3>Полное планирование свадьбы</h3>
-                <p>Полное планирование от начала до конца.</p>
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Наши Услуги</h2>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,ceremony" alt="Полная организация свадьбы">
+                <h3>Полная организация свадьбы</h3>
+                <p>Мы берем на себя все аспекты планирования и организации вашего мероприятия, от выбора места до координации в день свадьбы.</p>
             </div>
-            <div class="service">
-                <h3>Координация в день свадьбы</h3>
-                <p>Обеспечение гладкого хода событий в день свадьбы.</p>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,decor" alt="Частичная организация">
+                <h3>Частичная организация</h3>
+                <p>Поможем с ключевыми моментами вашего праздника, оставив вам возможность самостоятельно заняться другими вопросами.</p>
             </div>
-            <div class="service">
-                <h3>Выбор места проведения</h3>
-                <p>Помощь в выборе идеального места для свадьбы.</p>
-            </div>
-            <div class="service">
-                <h3>Управление поставщиками</h3>
-                <p>Координация работы всех поставщиков.</p>
-            </div>
-            <div class="service">
-                <h3>Индивидуальный дизайн свадьбы</h3>
-                <p>Создание уникального и персонализированного дизайна свадьбы.</p>
+            <div class="service-item">
+                <img src="https://source.unsplash.com/1600x900/?wedding,reception" alt="Координация дня свадьбы">
+                <h3>Координация дня свадьбы</h3>
+                <p>Убедимся, что все идет по плану в день свадьбы, чтобы вы могли наслаждаться своим праздником без забот.</p>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="section">
-        <h2>Галерея</h2>
-        <div class="gallery">
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 1">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 1">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 2">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 2">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 3">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 3">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 4">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 4">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 5">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 5">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 6">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 6">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 7" class="hidden">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 7">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 8" class="hidden">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 8">
-            </a>
-            <a href="https://source.unsplash.com/random/1600x900/?wedding" data-fancybox="wedding-gallery" data-caption="Галерея свадеб, фото 9" class="hidden">
-                <img src="https://source.unsplash.com/random/300x200/?wedding" alt="Галерея свадеб, фото 9">
-            </a>
-        </div>
-    </section>
-
-    <section id="testimonials" class="section">
-        <h2>Отзывы</h2>
-        <div class="testimonials">
-            <div class="testimonial">
-                <p>"Наша свадьба была идеальной благодаря [Имя организатора]." - Счастливая пара</p>
+    <section class="clients" id="clients">
+        <div class="container">
+            <h2>Наши Клиенты</h2>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,couple" alt="Клиент 1">
+                <p>Анна и Игорь</p>
             </div>
-            <div class="testimonial">
-                <p>"Все было идеально, мы просто наслаждались нашим днем." - Еще одна счастливая пара</p>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,bride,groom" alt="Клиент 2">
+                <p>Ольга и Михаил</p>
+            </div>
+            <div class="client-item">
+                <img src="https://source.unsplash.com/400x400/?wedding,happy,couple" alt="Клиент 3">
+                <p>Екатерина и Алексей</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="section">
-        <h2>Свяжитесь с нами</h2>
-        <form class="contact-form">
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="email" placeholder="Ваш email" required>
-            <input type="tel" placeholder="Ваш телефон" required>
-            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
-            <button type="submit">Отправить сообщение</button>
-        </form>
-        <p>Email: planner@example.com</p>
-        <p>Телефон: (123) 456-7890</p>
-        <div class="social-icons">
-            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2>Отзывы клиентов</h2>
+            <div class="testimonial-item">
+                <p>"Спасибо вам за невероятную организацию нашей свадьбы! Все прошло идеально."</p>
+                <span>- Анна и Игорь</span>
+            </div>
+            <div class="testimonial-item">
+                <p>"Лучший свадебный организатор! Рекомендуем всем."</p>
+                <span>- Ольга и Михаил</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Связаться с нами</h2>
+            <form action="#" method="post">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="submit-button">Отправить</button>
+            </form>
+            <div class="contact-info">
+                <p>Email: info@weddingorganizer.ru</p>
+                <p>Телефон: +7 (123) 456-78-90</p>
+                <p>Адрес: г. Москва, ул. Свадебная, д.1</p>
+            </div>
         </div>
     </section>
 
     <footer class="footer">
-        <p>&copy; 2024 Организатор свадеб. Все права защищены.</p>
+        <div class="container">
+            <p>&copy; 2024 Свадебный Организатор. Все права защищены.</p>
+        </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const burger = document.querySelector('.burger');
-            const nav = document.querySelector('.nav');
-            const navLinks = document.querySelectorAll('.nav a');
-            const header = document.querySelector('.header');
-            const sticky = header.offsetHeight;
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
 
-            function toggleNav() {
-                nav.classList.toggle('active');
-                burger.classList.toggle('active');
-            }
-
-            function closeNav() {
-                nav.classList.remove('active');
-                burger.classList.remove('active');
-            }
-
-            function stickyNav() {
-                if (window.pageYOffset > sticky) {
-                    nav.classList.add('sticky');
-                } else {
-                    nav.classList.remove('sticky');
-                }
-            }
-
-            burger.addEventListener('click', toggleNav);
-            navLinks.forEach(link => link.addEventListener('click', closeNav));
-            window.addEventListener('scroll', stickyNav);
-
-            // Allow touch scrolling
-            nav.addEventListener('touchstart', function(event) {
-                event.preventDefault();
-            }, { passive: false });
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
         });
     </script>
 </body>
-
 </html>
